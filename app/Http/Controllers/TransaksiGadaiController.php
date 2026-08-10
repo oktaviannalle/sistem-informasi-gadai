@@ -8,6 +8,8 @@ use App\Http\Requests\StoreTransaksiGadaiRequest;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
+use App\Services\WhatsAppNotificationService;
+
 class TransaksiGadaiController extends Controller
 {
     public function index()
@@ -58,6 +60,24 @@ class TransaksiGadaiController extends Controller
         $transaksi->update(['status' => $request->status]);
 
         return redirect()->route('transaksi.index')->with('success', 'Status transaksi berhasil diubah menjadi ' . $request->status . '.');
+    }
+
+    public function cetak(TransaksiGadai $transaksi)
+    {
+        $transaksi->load(['barang.nasabah', 'admin']);
+
+        return view('transaksi.cetak', compact('transaksi'));
+    }
+
+    public function kirimPengingat(TransaksiGadai $transaksi, WhatsAppNotificationService $waService)
+    {
+        $result = $waService->sendReminder($transaksi);
+
+        if ($result['success']) {
+            return redirect()->back()->with('success', 'Notifikasi WhatsApp pengingat jatuh tempo berhasil dikirim ke ' . $result['target_phone'] . '.');
+        }
+
+        return redirect()->back()->with('error', $result['message']);
     }
 
     public function destroy(TransaksiGadai $transaksi)

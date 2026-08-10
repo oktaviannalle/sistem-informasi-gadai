@@ -23,6 +23,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('barang-gadai', BarangGadaiController::class);
     Route::resource('transaksi', TransaksiGadaiController::class)->only(['index', 'create', 'store', 'destroy']);
     Route::patch('transaksi/{transaksi}/status', [TransaksiGadaiController::class, 'updateStatus'])->name('transaksi.updateStatus');
+    Route::get('transaksi/{transaksi}/cetak', [TransaksiGadaiController::class, 'cetak'])->name('transaksi.cetak');
+    Route::post('transaksi/{transaksi}/kirim-pengingat', [TransaksiGadaiController::class, 'kirimPengingat'])->name('transaksi.kirimPengingat');
 });
 
 require __DIR__.'/auth.php';
