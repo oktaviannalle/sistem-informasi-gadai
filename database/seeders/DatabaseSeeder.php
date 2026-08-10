@@ -14,11 +14,20 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        // 1. Create Admin User for Gadai Startech
+        // 1. Create Admin Users for Gadai Startech
         $admin = User::firstOrCreate(
             ['email' => 'admin@gadaistartech.com'],
             [
                 'name' => 'Admin Gadai Startech',
+                'password' => Hash::make('password'),
+                'email_verified_at' => now(),
+            ]
+        );
+
+        User::firstOrCreate(
+            ['email' => 'oktaviarallee@gmail.com'],
+            [
+                'name' => 'Oktavia Rallee',
                 'password' => Hash::make('password'),
                 'email_verified_at' => now(),
             ]

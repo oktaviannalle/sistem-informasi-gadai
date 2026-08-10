@@ -27,13 +27,16 @@ Aplikasi Web **Sistem Informasi Gadai** yang dirancang khusus untuk memenuhi keb
 ### 4. 📲 Integrasi WhatsApp Notification Gateway (API 3rd Party)
 - Service simulasi pengiriman notifikasi pesan pengingat jatuh tempo & penagihan denda langsung ke nomor WhatsApp nasabah.
 
-### 5. 🔑 RESTful API dengan Laravel Sanctum
+### 5. 🔐 Manajemen Admin / Multi-Petugas (Internal Management)
+- Fitur terpusat untuk mendaftarkan akun admin/petugas cabang baru, memperbarui informasi profil admin, reset password, dan menghapus akun petugas dengan proteksi *self-deletion*.
+
+### 6. 🔑 RESTful API dengan Laravel Sanctum
 - Menyediakan endpoint API yang aman untuk integrasi aplikasi mobile atau pihak ketiga:
   - Autentikasi API Token (`/api/login`, `/api/logout`).
   - Endpoint resource data Nasabah, Barang Gadai, dan Transaksi Gadai (`/api/nasabah`, `/api/barang-gadai`, `/api/transaksi`).
 
-### 6. 🧪 Automated Testing Suite
-- Dilengkapi dengan 29 pengujian otomatis (Unit & Feature Test) menggunakan **Pest PHP** untuk menjamin kestabilan dan keandalan kode (*maintainability*).
+### 7. 🧪 Automated Testing Suite
+- Dilengkapi dengan 34 pengujian otomatis (Unit & Feature Test) menggunakan **Pest PHP** untuk menjamin kestabilan dan keandalan kode (*maintainability*).
 
 ---
 

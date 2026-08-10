@@ -6,6 +6,7 @@ use App\Http\Controllers\BarangGadaiController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TransaksiGadaiController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\AdminManagementController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -25,6 +26,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('transaksi/{transaksi}/status', [TransaksiGadaiController::class, 'updateStatus'])->name('transaksi.updateStatus');
     Route::get('transaksi/{transaksi}/cetak', [TransaksiGadaiController::class, 'cetak'])->name('transaksi.cetak');
     Route::post('transaksi/{transaksi}/kirim-pengingat', [TransaksiGadaiController::class, 'kirimPengingat'])->name('transaksi.kirimPengingat');
+    Route::resource('admin-management', AdminManagementController::class);
 });
 
 require __DIR__.'/auth.php';
