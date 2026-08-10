@@ -70,13 +70,13 @@
                                     <td class="px-5 py-4 font-extrabold text-blue-900 text-sm font-mono">
                                         Rp {{ number_format($transaksi->total_tebusan, 0, ',', '.') }}
                                     </td>
-                                    <td class="px-5 py-4 whitespace-nowrap text-[11px]">
-                                        <div class="font-bold text-slate-700">{{ $transaksi->tanggal_jatuh_tempo->format('d M Y') }}</div>
+                                    <td class="px-5 py-4 whitespace-nowrap text-xs">
+                                        <div class="font-black text-slate-900 font-mono whitespace-nowrap">📅 {{ $transaksi->tanggal_jatuh_tempo->format('d M Y') }}</div>
                                         @if ($transaksi->status === 'aktif')
                                             @if ($transaksi->hari_terlambat > 0)
-                                                <span class="bg-rose-100 text-rose-700 font-bold px-2 py-0.5 rounded text-[10px] block w-max mt-1">Terlambat {{ $transaksi->hari_terlambat }} hr</span>
+                                                <span class="bg-rose-100 text-rose-800 font-black px-2 py-0.5 rounded-md text-[10px] block w-max mt-1 whitespace-nowrap border border-rose-300">Terlambat {{ $transaksi->hari_terlambat }} hr</span>
                                             @elseif (now()->diffInDays($transaksi->tanggal_jatuh_tempo, false) <= 7)
-                                                <span class="bg-amber-100 text-amber-700 font-bold px-2 py-0.5 rounded text-[10px] block w-max mt-1">Segera Tempo</span>
+                                                <span class="bg-amber-100 text-amber-900 font-black px-2 py-0.5 rounded-md text-[10px] block w-max mt-1 whitespace-nowrap border border-amber-300">Segera Tempo</span>
                                             @endif
                                         @endif
                                     </td>

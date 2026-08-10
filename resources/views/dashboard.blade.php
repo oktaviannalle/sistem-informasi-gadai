@@ -159,15 +159,17 @@
                                     <tbody class="divide-y divide-slate-200">
                                         @foreach($jatuhTempoMendekat as $t)
                                             <tr class="hover:bg-slate-50 transition">
-                                                <td class="py-3.5 px-3">
+                                                <td class="py-3.5 px-4 font-bold text-slate-900">
                                                     <div class="font-black text-slate-900">{{ $t->barang->nasabah->nama ?? '-' }}</div>
                                                     <div class="text-[11px] font-bold text-slate-600 font-mono">{{ $t->barang->nasabah->no_hp ?? '-' }}</div>
                                                 </td>
-                                                <td class="py-3.5 px-3 text-slate-900 font-bold">{{ $t->barang->nama_barang ?? '-' }}</td>
-                                                <td class="py-3.5 px-3">
-                                                    <span class="font-black text-amber-700 bg-amber-50 px-2 py-1 rounded border border-amber-200">{{ $t->tanggal_jatuh_tempo->format('d M Y') }}</span>
+                                                <td class="py-3.5 px-4 text-slate-900 font-bold">{{ $t->barang->nama_barang ?? '-' }}</td>
+                                                <td class="py-3.5 px-4 whitespace-nowrap">
+                                                    <span class="inline-block whitespace-nowrap px-3 py-1 rounded-lg border-2 border-amber-300 font-black text-amber-900 bg-amber-50 font-mono text-xs shadow-sm">
+                                                        📅 {{ $t->tanggal_jatuh_tempo->format('d M Y') }}
+                                                    </span>
                                                 </td>
-                                                <td class="py-3.5 px-3 text-right font-black text-slate-900 font-mono">
+                                                <td class="py-3.5 px-4 text-right font-black text-slate-900 font-mono whitespace-nowrap">
                                                     Rp {{ number_format($t->jumlah_pinjaman, 0, ',', '.') }}
                                                 </td>
                                             </tr>
@@ -218,7 +220,7 @@
                                                 {{ $t->status }}
                                             </span>
                                         </td>
-                                        <td class="py-3.5 px-3 text-right text-slate-700 font-mono font-bold">{{ $t->tanggal_gadai->format('d M Y') }}</td>
+                                        <td class="py-3.5 px-3 text-right text-slate-900 font-mono font-black whitespace-nowrap">{{ $t->tanggal_gadai->format('d M Y') }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
