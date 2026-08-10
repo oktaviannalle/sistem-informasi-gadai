@@ -1,62 +1,75 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">Barang Gadai</h2>
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div>
+                <h2 class="font-extrabold text-2xl text-slate-900 tracking-tight">Inventaris Barang Gadai</h2>
+                <p class="text-xs text-slate-500 mt-1">Kelola barang jaminan, kategori produk, dan taksiran harga gadai</p>
+            </div>
+            <div>
+                <a href="{{ route('barang-gadai.create') }}" class="bg-gradient-to-r from-blue-700 to-cyan-600 text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow hover:shadow-md transition inline-flex items-center gap-1.5">
+                    <span>+ Tambah Barang</span>
+                </a>
+            </div>
+        </div>
     </x-slot>
 
     <div class="py-8">
-        <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
             @if (session('success'))
-                <div class="mb-4 bg-green-100 text-green-700 text-sm px-4 py-3 rounded-lg">
-                    {{ session('success') }}
+                <div class="mb-5 bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-medium px-4 py-3 rounded-xl flex items-center justify-between shadow-sm">
+                    <span>{{ session('success') }}</span>
                 </div>
             @endif
 
-            <div class="flex justify-end mb-4">
-                <a href="{{ route('barang-gadai.create') }}" class="bg-gray-900 text-white text-sm font-semibold px-4 py-2 rounded-lg hover:bg-gray-700 transition">
-                    + Tambah Barang
-                </a>
-            </div>
-
-            <div class="bg-white shadow-sm rounded-lg overflow-hidden">
+            <div class="bg-white rounded-2xl border border-slate-200/80 shadow-sm overflow-hidden">
                 <div class="overflow-x-auto">
-                    <table class="w-full text-sm text-left">
-                        <thead class="bg-gray-50 text-gray-500 text-xs uppercase">
+                    <table class="w-full text-xs text-left">
+                        <thead class="bg-slate-50 text-slate-400 font-bold uppercase text-[10px] tracking-wider border-b border-slate-100">
                             <tr>
-                                <th class="px-6 py-3">Foto</th>
-                                <th class="px-6 py-3">Nama Barang</th>
-                                <th class="px-6 py-3">Kategori</th>
-                                <th class="px-6 py-3">Taksiran</th>
-                                <th class="px-6 py-3">Nasabah</th>
-                                <th class="px-6 py-3 text-right">Aksi</th>
+                                <th class="px-6 py-4">Preview</th>
+                                <th class="px-6 py-4">Nama Barang Jaminan</th>
+                                <th class="px-6 py-4">Kategori</th>
+                                <th class="px-6 py-4">Pemilik (Nasabah)</th>
+                                <th class="px-6 py-4">Taksiran Harga Pasar</th>
+                                <th class="px-6 py-4 text-right">Aksi</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="divide-y divide-slate-100">
                             @forelse ($barangGadais as $barang)
-                                <tr class="border-t border-gray-100">
+                                <tr class="hover:bg-slate-50 transition">
                                     <td class="px-6 py-3">
                                         @if ($barang->foto)
-                                            <img src="{{ Storage::url($barang->foto) }}" class="w-12 h-12 object-cover rounded-lg">
+                                            <img src="{{ Storage::url($barang->foto) }}" class="w-12 h-12 object-cover rounded-xl border border-slate-200 shadow-sm">
                                         @else
-                                            <div class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center text-gray-400 text-xs">N/A</div>
+                                            <div class="w-12 h-12 bg-slate-100 border border-slate-200 rounded-xl flex items-center justify-center text-slate-400 text-base font-bold">📷</div>
                                         @endif
                                     </td>
-                                    <td class="px-6 py-3 font-medium text-gray-800">{{ $barang->nama_barang }}</td>
-                                    <td class="px-6 py-3 text-gray-600">{{ $barang->kategori }}</td>
-                                    <td class="px-6 py-3 text-gray-600">Rp {{ number_format($barang->taksiran_harga, 0, ',', '.') }}</td>
-                                    <td class="px-6 py-3 text-gray-600">{{ $barang->nasabah->nama ?? '-' }}</td>
-                                    <td class="px-6 py-3 text-right space-x-3">
-                                        <a href="{{ route('barang-gadai.edit', $barang) }}" class="text-blue-600 hover:underline">Edit</a>
+                                    <td class="px-6 py-4 font-bold text-slate-900">{{ $barang->nama_barang }}</td>
+                                    <td class="px-6 py-4">
+                                        <span class="bg-cyan-50 text-cyan-700 border border-cyan-200/60 font-semibold px-2.5 py-0.5 rounded-full text-[10px]">
+                                            {{ $barang->kategori }}
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 font-bold text-slate-800">{{ $barang->nasabah->nama ?? '-' }}</td>
+                                    <td class="px-6 py-4 font-bold text-emerald-700 font-mono">
+                                        Rp {{ number_format($barang->taksiran_harga, 0, ',', '.') }}
+                                    </td>
+                                    <td class="px-6 py-4 text-right space-x-2 whitespace-nowrap">
+                                        <a href="{{ route('barang-gadai.edit', $barang) }}" class="text-blue-600 hover:text-blue-800 font-bold hover:underline">Edit</a>
                                         <form action="{{ route('barang-gadai.destroy', $barang) }}" method="POST" class="inline" onsubmit="return confirm('Hapus barang {{ $barang->nama_barang }}?')">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="text-red-600 hover:underline">Hapus</button>
+                                            <button type="submit" class="text-rose-600 hover:text-rose-800 font-bold hover:underline">Hapus</button>
                                         </form>
                                     </td>
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="6" class="px-6 py-8 text-center text-gray-400">Belum ada data barang gadai. Klik "Tambah Barang" untuk mulai.</td>
+                                    <td colspan="6" class="px-6 py-12 text-center text-slate-400">
+                                        <span class="text-3xl block mb-2">📦</span>
+                                        Belum ada data barang gadai. Klik <strong>"+ Tambah Barang"</strong> untuk pencatatan baru.
+                                    </td>
                                 </tr>
                             @endforelse
                         </tbody>
@@ -64,7 +77,7 @@
                 </div>
             </div>
 
-            <div class="mt-4">{{ $barangGadais->links() }}</div>
+            <div class="mt-5">{{ $barangGadais->links() }}</div>
         </div>
     </div>
 </x-app-layout>

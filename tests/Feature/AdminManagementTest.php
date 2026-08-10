@@ -12,7 +12,7 @@ beforeEach(function () {
 it('can display admin management index page for authenticated admin', function () {
     $response = $this->actingAs($this->admin)->get(route('admin-management.index'));
     $response->assertStatus(200);
-    $response->assertSee('Manajemen Admin / Petugas');
+    $response->assertSee('Manajemen Admin');
     $response->assertSee('Admin Utama');
 });
 

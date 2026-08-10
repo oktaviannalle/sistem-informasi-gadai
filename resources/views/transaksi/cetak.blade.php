@@ -36,10 +36,13 @@
     <div class="print-container max-w-3xl mx-auto bg-white p-8 rounded-xl shadow-md border border-gray-200">
         <!-- Header -->
         <div class="flex justify-between items-center border-b pb-6 mb-6">
-            <div>
-                <h1 class="text-2xl font-bold text-blue-900 tracking-wide">GADAI STARTECH</h1>
-                <p class="text-xs text-gray-500">Layanan Gadai Cepat, Aman & Terpercaya</p>
-                <p class="text-xs text-gray-500">Jl. Kaliurang KM 9, Sleman, DI Yogyakarta | Telp: 0823-4275-6680</p>
+            <div class="flex items-center gap-4">
+                <img src="{{ asset('images/logo.svg') }}" alt="Logo" class="h-16 w-16 object-contain">
+                <div>
+                    <h1 class="text-2xl font-black text-blue-900 tracking-tight uppercase">SISTEM-GADAI MAHENSWA</h1>
+                    <p class="text-xs font-bold text-blue-700">GADAI STARTECH - CABANG SLEMAN</p>
+                    <p class="text-xs text-gray-500">Jl. Kaliurang KM 9, Sleman, DI Yogyakarta | Telp: 0823-4275-6680</p>
+                </div>
             </div>
             <div class="text-right">
                 <span class="inline-block bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-1">
